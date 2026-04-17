@@ -201,19 +201,21 @@
                     </div>
                 </div>
 
-                <form id="contact-form" action="https://formspree.io/f/xojnenkn" method="POST" class="contact-form">
-                    <div class="input-box">
-                        <input type="text" name="name" placeholder="Full Name" required>
-                        <input type="email" name="email" placeholder="Email Address" required>
-                    </div>
-                    <div class="input-box">
-                        <input type="text" name="subject" placeholder="Email Subject" required>
-                    </div>
-                    <textarea name="message" id="message" cols="30" rows="10" placeholder="Your Message"
-                        required></textarea>
-                    <button type="submit" class="btn">Send Message</button>
-                    <p id="form-status"></p>
-                </form>
+                <form id="contact-form" class="contact-form">
+    <div class="input-box">
+        <input type="text" name="name" placeholder="Full Name" required>
+        <input type="email" name="email" placeholder="Email Address" required>
+    </div>
+    <div class="input-box">
+        <input type="text" name="subject" placeholder="Email Subject" required>
+    </div>
+    <textarea name="message" id="message" cols="30" rows="10" placeholder="Your Message" required></textarea>
+    
+    <button type="submit" class="btn">Send Message</button>
+    
+    <!-- Status message -->
+    <p id="form-status" style="margin-top:10px;"></p>
+</form>
             </div>
         </div>
     </section>
