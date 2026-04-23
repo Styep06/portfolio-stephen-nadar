@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -8,10 +10,15 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// MongoDB connection
-mongoose.connect("mongodb+srv://admin:admin@shopdb-project.qrwcugn.mongodb.net/?appName=shopDB-project")
-.then(() => console.log("MongoDB Connected"))
-.catch(err => console.log(err));
+// root route (for testing / Render)
+app.get("/", (req, res) => {
+  res.send("API is running...");
+});
+
+// MongoDB connection (ONLY ONCE)
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log("MongoDB Connected"))
+  .catch(err => console.log(err));
 
 // schema
 const ContactSchema = new mongoose.Schema({
@@ -32,9 +39,14 @@ app.post("/api/contact", async (req, res) => {
 
     res.json({ message: "Message saved successfully!" });
   } catch (err) {
+    console.error(err);
     res.status(500).json({ message: "Error saving message" });
   }
 });
 
-// server start
-app.listen(5000, () => console.log("Server running on port 5000"));
+// dynamic port (IMPORTANT for Render)
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
