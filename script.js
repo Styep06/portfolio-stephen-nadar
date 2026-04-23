@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("contact-form");
   const status = document.getElementById("form-status");
 
-  // Safety check
   if (!form) {
     console.error("Form not found!");
     return;
@@ -13,7 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    // Show loading
     status.innerText = "Sending...";
     status.style.color = "yellow";
 
@@ -25,17 +23,19 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     try {
-      const response = await fetch("http://localhost:5000/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(formData)
-      });
+      const response = await fetch(
+        "https://portfolio-stephen-nadar.onrender.com/api/contact",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(formData)
+        }
+      );
 
       const data = await response.json();
 
-      // Success
       status.innerText = "✅ Message sent successfully!";
       status.style.color = "lightgreen";
 
@@ -44,7 +44,6 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch (error) {
       console.error("Error:", error);
 
-      // Error
       status.innerText = "❌ Failed to send message. Try again.";
       status.style.color = "red";
     }
